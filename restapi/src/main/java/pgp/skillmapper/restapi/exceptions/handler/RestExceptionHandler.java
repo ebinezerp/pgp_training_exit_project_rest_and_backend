@@ -19,7 +19,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(EmployeeNotFoundException.class)
 	public ResponseEntity<String> handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
-		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(EmployeeValidationException.class)

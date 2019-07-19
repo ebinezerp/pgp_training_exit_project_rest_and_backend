@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pgp.skillmapper.backend.model.Employee;
@@ -35,7 +36,7 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeValidation employeeValidation;
-	
+
 	@Autowired
 	private RequestBodyValidations requestBodyValidations;
 
@@ -60,9 +61,9 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employee")
-	public ResponseEntity<Employee> register(@Valid  @RequestBody Employee employee, Errors errors) {
-		
-		if(errors.hasErrors()) {
+	public ResponseEntity<Employee> register(@Valid @RequestBody Employee employee, Errors errors) {
+
+		if (errors.hasErrors()) {
 			throw new EmployeeValidationException(requestBodyValidations.employeeValidations(errors));
 		}
 
@@ -81,9 +82,9 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/employee")
-	public ResponseEntity<Employee> update(@Valid @RequestBody Employee employee,Errors errors) {
-		
-		if(errors.hasErrors()) {
+	public ResponseEntity<Employee> update(@Valid @RequestBody Employee employee, Errors errors) {
+
+		if (errors.hasErrors()) {
 			throw new EmployeeValidationException(requestBodyValidations.employeeValidations(errors));
 		}
 
@@ -98,6 +99,20 @@ public class EmployeeController {
 		} else {
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 		}
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<Employee> login(@RequestParam("username") String usernameOrEmail,
+			@RequestParam("password") String password) {
+
+		Employee employee = employeeService.getEmployee(usernameOrEmail, usernameOrEmail, password);
+
+		if (employee == null) {
+			throw new EmployeeNotFoundException(usernameOrEmail);
+		}
+
+		return new ResponseEntity<Employee>(employee, HttpStatus.FOUND);
+
 	}
 
 }

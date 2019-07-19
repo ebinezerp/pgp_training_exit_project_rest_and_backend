@@ -68,6 +68,15 @@ public class EmployeeService {
 			return null;
 		}
 	}
+	
+	public Employee getEmployee(String email, String username,String password) {
+		try {
+			return employeeRepository.findByUsernameOrEmailAndPassword(username, email,password);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public List<Employee> getEmployeeByFirstname(String firstname) {
 		try {
