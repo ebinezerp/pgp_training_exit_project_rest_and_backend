@@ -53,5 +53,5 @@ public class Profile {
 	private Employee employee;
 
 	@ManyToMany(mappedBy = "profiles", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
-	private List<Skill> skills;
+	private List<SkillDetails> skillDetails;
 }

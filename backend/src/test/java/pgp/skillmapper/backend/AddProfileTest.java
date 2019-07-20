@@ -11,9 +11,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import pgp.skillmapper.backend.model.Profile;
-import pgp.skillmapper.backend.model.Skill;
+import pgp.skillmapper.backend.model.SkillDetails;
 import pgp.skillmapper.backend.service.ProfileService;
-import pgp.skillmapper.backend.service.SkillService;
+import pgp.skillmapper.backend.service.SkillDetailsService;
 import pgp.skillmapper.backend.util.ProfileUtility;
 
 @RunWith(SpringRunner.class)
@@ -24,7 +24,7 @@ public class AddProfileTest {
 	private ProfileService profileService;
 
 	@Autowired
-	private SkillService skillService;
+	private SkillDetailsService skillDetailsService;
 
 	private Profile profile;
 
@@ -37,8 +37,8 @@ public class AddProfileTest {
 	public void tearDown() {
 
 		if (profileService.getProfile(profile.getId()) != null) {
-			for (Skill skill : profile.getSkills()) {
-				skillService.delete(skill);
+			for (SkillDetails skillDetails : profile.getSkillDetails()) {
+				skillDetailsService.delete(skillDetails);
 			}
 			profileService.delete(profile);
 		}

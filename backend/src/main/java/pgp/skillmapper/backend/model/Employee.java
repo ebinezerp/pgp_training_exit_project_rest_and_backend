@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -78,5 +80,6 @@ public class Employee {
 	private boolean enabled;
 
 	@OneToOne(mappedBy = "employee")
+	@JsonIgnore
 	private Profile profile;
 }

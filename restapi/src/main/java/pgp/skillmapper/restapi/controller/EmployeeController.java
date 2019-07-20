@@ -84,15 +84,19 @@ public class EmployeeController {
 	@PutMapping("/employee")
 	public ResponseEntity<Employee> update(@Valid @RequestBody Employee employee, Errors errors) {
 
+		System.out.println("Called");
+		System.out.println("Errors"+ employee);
 		if (errors.hasErrors()) {
 			throw new EmployeeValidationException(requestBodyValidations.employeeValidations(errors));
 		}
+		System.out.println(employee);
 
 		Map<String, String> errorMessages = employeeValidation.validateEmployeeUpdateRecord(employee);
-
 		if (errorMessages.size() > 0) {
 			throw new EmployeeValidationException(errorMessages);
 		}
+		
+		System.out.println(employee);
 
 		if (employeeService.update(employee) == null) {
 			return new ResponseEntity<Employee>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -111,7 +115,7 @@ public class EmployeeController {
 			throw new EmployeeNotFoundException(usernameOrEmail);
 		}
 
-		return new ResponseEntity<Employee>(employee, HttpStatus.FOUND);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 
 	}
 
