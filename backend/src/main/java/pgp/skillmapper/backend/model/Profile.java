@@ -52,6 +52,6 @@ public class Profile {
 	@JsonIgnore
 	private Employee employee;
 
-	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
+	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH })
 	private List<SkillDetails> skillDetailsList;
 }

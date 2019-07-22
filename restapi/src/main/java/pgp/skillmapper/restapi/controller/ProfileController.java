@@ -42,11 +42,16 @@ public class ProfileController {
 	@PostMapping("/profile")
 	public ResponseEntity<Profile> saveProfile(@RequestBody Profile profile, @RequestParam("id") Long employeeId) {
 
+		System.out.println(profile);
 		profile.setEmployee(employeeService.getEmployee(employeeId));
 		for(SkillDetails skillDetails: profile.getSkillDetailsList()) {
+			System.out.println(skillDetails);
 			skillDetails.setProfile(profile);
-			skillDetails.getSkill().setSkillDetails(skillDetails);
+			Skill skill=skillDetails.getSkill();
+			skill.setSkillDetails(skillDetails);
 		}
+		
+		System.out.println(profile);
 		
 		profileService.save(profile);
 		

@@ -32,7 +32,7 @@ public class Skill {
 	private String skillName;
 	
 	
-	@OneToOne
+	@OneToOne(mappedBy = "skill")
 	@ToString.Exclude
 	@JsonIgnore
 	private SkillDetails skillDetails;

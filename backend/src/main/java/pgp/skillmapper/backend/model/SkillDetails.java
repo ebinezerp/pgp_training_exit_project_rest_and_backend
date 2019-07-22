@@ -36,7 +36,7 @@ public class SkillDetails {
 	
 	@NotNull(message = "Version Should not be empty")
 	@NotBlank(message = "Version Should not be blank")
-	@Column(unique = true, nullable = false)
+	@Column(unique = false, nullable = false)
 	private String version;
 	
 	@Enumerated(EnumType.STRING)
@@ -51,7 +51,7 @@ public class SkillDetails {
 	@JsonIgnore
 	private Profile profile;
 	
-	@OneToOne(mappedBy = "skillDetails", cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	private Skill skill;
 }
 
