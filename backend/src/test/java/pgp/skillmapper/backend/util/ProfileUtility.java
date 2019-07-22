@@ -16,13 +16,11 @@ public class ProfileUtility {
 		
 		ArrayList<SkillDetails> skillDetilsList = new ArrayList<SkillDetails>();
 		SkillDetails skillDetails1=new SkillDetails();
-		skillDetails1.setSkillName("Java");
 		skillDetails1.setVersion("8");
 		skillDetails1.setSkillExperience(2);
 		skillDetails1.setKnowledgeLevel(Knowledge.Expert);
 		
 		SkillDetails skillDetails2=new SkillDetails();
-		skillDetails2.setSkillName("Angular");
 		skillDetails2.setVersion("6");
 		skillDetails2.setSkillExperience(1);
 		skillDetails2.setKnowledgeLevel(Knowledge.Intermediate);
@@ -30,7 +28,7 @@ public class ProfileUtility {
 		skillDetilsList.add(skillDetails1);
 		skillDetilsList.add(skillDetails2);
 		
-		profile.setSkillDetails(skillDetilsList);
+		profile.setSkillDetailsList(skillDetilsList);
 		
 		return profile;
 	}

@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pgp.skillmapper.backend.model.Profile;
+import pgp.skillmapper.backend.model.Skill;
+import pgp.skillmapper.backend.model.SkillDetails;
 import pgp.skillmapper.backend.service.EmployeeService;
 import pgp.skillmapper.backend.service.ProfileService;
 import pgp.skillmapper.backend.service.SkillDetailsService;
+import pgp.skillmapper.backend.service.SkillService;
 
 
 @RestController
@@ -31,12 +34,23 @@ public class ProfileController {
 	
 	@Autowired
 	private SkillDetailsService skillDetailsService;
+	
+	
+	@Autowired
+	private SkillService skillService;
 
 	@PostMapping("/profile")
 	public ResponseEntity<Profile> saveProfile(@RequestBody Profile profile, @RequestParam("id") Long employeeId) {
 
 		profile.setEmployee(employeeService.getEmployee(employeeId));
+		for(SkillDetails skillDetails: profile.getSkillDetailsList()) {
+			skillDetails.setProfile(profile);
+			skillDetails.getSkill().setSkillDetails(skillDetails);
+		}
+		
 		profileService.save(profile);
+		
+		
 		return new ResponseEntity<Profile>(profile, HttpStatus.OK);
 	}
 

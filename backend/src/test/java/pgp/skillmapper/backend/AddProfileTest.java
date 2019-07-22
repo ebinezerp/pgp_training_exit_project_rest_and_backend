@@ -37,7 +37,7 @@ public class AddProfileTest {
 	public void tearDown() {
 
 		if (profileService.getProfile(profile.getId()) != null) {
-			for (SkillDetails skillDetails : profile.getSkillDetails()) {
+			for (SkillDetails skillDetails : profile.getSkillDetailsList()) {
 				skillDetailsService.delete(skillDetails);
 			}
 			profileService.delete(profile);

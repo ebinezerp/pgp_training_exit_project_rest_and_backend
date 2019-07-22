@@ -1,5 +1,6 @@
 package pgp.skillmapper.backend.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,11 +34,6 @@ public class SkillDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "Skill Should not be empty")
-	@NotBlank(message = "Skill Should not be blank")
-	@Column(unique = true, nullable = false)
-	private String skillName;
-	
 	@NotNull(message = "Version Should not be empty")
 	@NotBlank(message = "Version Should not be blank")
 	@Column(unique = true, nullable = false)
@@ -53,9 +49,9 @@ public class SkillDetails {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@ToString.Exclude
 	@JsonIgnore
-	private Profile profiles;
+	private Profile profile;
 	
-	@OneToOne(mappedBy = "skillDetails")
+	@OneToOne(mappedBy = "skillDetails", cascade = CascadeType.PERSIST)
 	private Skill skill;
 }
 

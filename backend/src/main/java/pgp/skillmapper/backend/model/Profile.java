@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -52,6 +52,6 @@ public class Profile {
 	@JsonIgnore
 	private Employee employee;
 
-	@ManyToMany(mappedBy = "profiles", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
-	private List<SkillDetails> skillDetails;
+	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
+	private List<SkillDetails> skillDetailsList;
 }
