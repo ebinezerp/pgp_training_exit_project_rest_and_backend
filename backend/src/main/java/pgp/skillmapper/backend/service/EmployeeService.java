@@ -25,6 +25,7 @@ public class EmployeeService {
 	}
 
 	public Employee update(Employee employee) {
+		System.out.println("update method called");
 		try {
 			return employeeRepository.save(employee);
 		} catch (Exception e) {
@@ -71,7 +72,7 @@ public class EmployeeService {
 	
 	public Employee getEmployee(String email, String username,String password) {
 		try {
-			return employeeRepository.findByUsernameOrEmailAndPassword(username, email,password);
+			return employeeRepository.login(username, email,password);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

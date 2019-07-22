@@ -86,5 +86,15 @@ public class ProfileService {
 			return false;
 		}
 	}
+	
+	
+	public List<Profile> search(List<String> skillNames, String location){
+		try {
+			return profileRepository.getProfiles(skillNames, location);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

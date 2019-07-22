@@ -79,7 +79,7 @@ public class Employee {
 	@Column(nullable = false)
 	private boolean enabled;
 
-	@OneToOne(mappedBy = "employee")
+	@OneToOne(mappedBy = "employee", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Profile profile;
 }

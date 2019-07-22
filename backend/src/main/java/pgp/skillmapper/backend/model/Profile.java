@@ -49,7 +49,6 @@ public class Profile {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@ToString.Exclude
-	@JsonIgnore
 	private Employee employee;
 
 	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH })
